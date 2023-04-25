@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 function ListGroup() {
   const items = ['New York', 'San Francisco', 'Tokyo', 'Toronto'];
-  // let selectedIndex = -1;
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
@@ -21,7 +20,6 @@ function ListGroup() {
             onClick={() => {
               console.log('Before', selectedIndex);
               setSelectedIndex(index);
-              // selectedIndex = index;
               console.log('After', selectedIndex);
             }}>
             {item}
