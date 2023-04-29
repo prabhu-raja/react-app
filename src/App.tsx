@@ -3,6 +3,7 @@ import { BsFillCalendarFill } from 'react-icons/bs';
 import Alert from './components/Alert';
 import ListGroup from './components/ListGroup';
 import Button from './components/Button/Button';
+import Like from './components/Like';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         heading="Cities"
         onSelectItem={handleSelectItem}></ListGroup>
       <Button>My button</Button>
+      <Like onClick={() => console.log('👍')}></Like>
     </div>
     // <div>
     //   {alertVisible && (
