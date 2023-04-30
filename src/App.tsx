@@ -8,6 +8,7 @@ import Like from './components/Like';
 import './App.css';
 import NavBar from './components/NavBar';
 import Cart from './components/Cart';
+import ExpandableText from './components/ExpandableText';
 
 function App() {
   // const [alertVisible, setAlertVisibility] = useState(false);
@@ -54,31 +55,46 @@ function App() {
   //   toppings: ['🍄'],
   // });
 
-  const [cart, setCart] = useState({
-    discount: 0.1,
-    items: [
-      { id: 1, title: 'Product 1', quantity: 1 },
-      { id: 2, title: 'Product 2', quantity: 1 },
-    ],
-  });
+  // const [cart, setCart] = useState({
+  //   discount: 0.1,
+  //   items: [
+  //     { id: 1, title: 'Product 1', quantity: 1 },
+  //     { id: 2, title: 'Product 2', quantity: 1 },
+  //   ],
+  // });
 
-  const handleClick = () => {
-    // const updated = { ...game, player: { ...game.player, name: 'Bob' } };
-    // setGame(updated);
-    // const updated = [...pizza.toppings, '🥦', '🌶️'];
-    // setPizza({ ...pizza, toppings: updated });
-    setCart({
-      ...cart,
-      items: cart.items.map((itm) =>
-        itm.id === 1 ? { ...itm, quantity: itm.quantity + 1 } : itm
-      ),
-    });
-  };
+  // const handleClick = () => {
+  //   const updated = { ...game, player: { ...game.player, name: 'Bob' } };
+  //   setGame(updated);
+  //   const updated = [...pizza.toppings, '🥦', '🌶️'];
+  //   setPizza({ ...pizza, toppings: updated });
+  //   setCart({
+  //     ...cart,
+  //     items: cart.items.map((itm) =>
+  //       itm.id === 1 ? { ...itm, quantity: itm.quantity + 1 } : itm
+  //     ),
+  //   });
+  // };
 
   return (
-    <div>
-      <button onClick={handleClick}>click</button>
-    </div>
+    <>
+      <ExpandableText>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
+        deserunt aut unde laboriosam soluta veniam, ea quos aliquid error cum?
+        Sapiente quod dolorum perferendis praesentium cum architecto. Nam
+        tenetur facere, id, tempore itaque quae nostrum dicta voluptatibus
+        deserunt animi ex dolor earum nisi deleniti, amet velit repellat
+        obcaecati ipsa optio dolores reprehenderit? Dolor accusantium ipsa iste
+        unde sed mollitia ea iure alias nostrum beatae, ducimus ipsam eveniet
+        dolorum debitis reprehenderit magnam assumenda minima, distinctio
+        similique quibusdam fugit nobis, soluta optio! Error nam voluptatibus
+        blanditiis laborum optio. Dolor quas eos magni quisquam veritatis optio
+        debitis suscipit. Vel nulla magni deleniti quae.
+      </ExpandableText>
+    </>
+    // <div>
+    //   <button onClick={handleClick}>click</button>
+    // </div>
     // <>
     //   <NavBar cartItemsCount={cartItems.length}></NavBar>
     //   <Cart cartItems={cartItems} onClear={handleClear}></Cart>
