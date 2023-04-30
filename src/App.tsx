@@ -9,8 +9,14 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Cart from './components/Cart';
 import ExpandableText from './components/ExpandableText';
+import Form from './Form';
 
 function App() {
+  return (
+    <div>
+      <Form />
+    </div>
+  );
   // const [alertVisible, setAlertVisibility] = useState(false);
   // const items = ['New York', 'San Francisco', 'Tokyo', 'Toronto'];
   // const handleSelectItem = (item: string) => {
@@ -76,56 +82,56 @@ function App() {
   //   });
   // };
 
-  return (
-    <>
-      <ExpandableText>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
-        deserunt aut unde laboriosam soluta veniam, ea quos aliquid error cum?
-        Sapiente quod dolorum perferendis praesentium cum architecto. Nam
-        tenetur facere, id, tempore itaque quae nostrum dicta voluptatibus
-        deserunt animi ex dolor earum nisi deleniti, amet velit repellat
-        obcaecati ipsa optio dolores reprehenderit? Dolor accusantium ipsa iste
-        unde sed mollitia ea iure alias nostrum beatae, ducimus ipsam eveniet
-        dolorum debitis reprehenderit magnam assumenda minima, distinctio
-        similique quibusdam fugit nobis, soluta optio! Error nam voluptatibus
-        blanditiis laborum optio. Dolor quas eos magni quisquam veritatis optio
-        debitis suscipit. Vel nulla magni deleniti quae.
-      </ExpandableText>
-    </>
-    // <div>
-    //   <button onClick={handleClick}>click</button>
-    // </div>
-    // <>
-    //   <NavBar cartItemsCount={cartItems.length}></NavBar>
-    //   <Cart cartItems={cartItems} onClear={handleClear}></Cart>
-    // </>
-    // <div>
-    //   {bugs.map((bug) => (
-    //     <p key={bug.id}>
-    //       {bug.title} {JSON.stringify(bug.isFixed)}
-    //     </p>
-    //   ))}
-    //   <button onClick={handleClick}>Update bug🐞</button>
-    // </div>
-    // <div>
-    //   <BsFillCalendarFill color="red" size="40" />
-    //   <ListGroup
-    //     items={items}
-    //     heading="Cities"
-    //     onSelectItem={handleSelectItem}></ListGroup>
-    //   <Button>My button</Button>
-    //   <Like onClick={() => console.log('👍')}></Like>
-    // </div>
-    // ---
-    // <div>
-    //   {alertVisible && (
-    //     <Alert onClose={() => setAlertVisibility(false)}>
-    //       Hello <span>World!</span>
-    //     </Alert>
-    //   )}
-    //   <Button onClick={() => setAlertVisibility(true)}>My button</Button>
-    // </div>
-  );
+  // return (
+  //   <>
+  //     <ExpandableText>
+  //       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores
+  //       deserunt aut unde laboriosam soluta veniam, ea quos aliquid error cum?
+  //       Sapiente quod dolorum perferendis praesentium cum architecto. Nam
+  //       tenetur facere, id, tempore itaque quae nostrum dicta voluptatibus
+  //       deserunt animi ex dolor earum nisi deleniti, amet velit repellat
+  //       obcaecati ipsa optio dolores reprehenderit? Dolor accusantium ipsa iste
+  //       unde sed mollitia ea iure alias nostrum beatae, ducimus ipsam eveniet
+  //       dolorum debitis reprehenderit magnam assumenda minima, distinctio
+  //       similique quibusdam fugit nobis, soluta optio! Error nam voluptatibus
+  //       blanditiis laborum optio. Dolor quas eos magni quisquam veritatis optio
+  //       debitis suscipit. Vel nulla magni deleniti quae.
+  //     </ExpandableText>
+  //   </>
+  //   // <div>
+  //   //   <button onClick={handleClick}>click</button>
+  //   // </div>
+  //   // <>
+  //   //   <NavBar cartItemsCount={cartItems.length}></NavBar>
+  //   //   <Cart cartItems={cartItems} onClear={handleClear}></Cart>
+  //   // </>
+  //   // <div>
+  //   //   {bugs.map((bug) => (
+  //   //     <p key={bug.id}>
+  //   //       {bug.title} {JSON.stringify(bug.isFixed)}
+  //   //     </p>
+  //   //   ))}
+  //   //   <button onClick={handleClick}>Update bug🐞</button>
+  //   // </div>
+  //   // <div>
+  //   //   <BsFillCalendarFill color="red" size="40" />
+  //   //   <ListGroup
+  //   //     items={items}
+  //   //     heading="Cities"
+  //   //     onSelectItem={handleSelectItem}></ListGroup>
+  //   //   <Button>My button</Button>
+  //   //   <Like onClick={() => console.log('👍')}></Like>
+  //   // </div>
+  //   // ---
+  //   // <div>
+  //   //   {alertVisible && (
+  //   //     <Alert onClose={() => setAlertVisibility(false)}>
+  //   //       Hello <span>World!</span>
+  //   //     </Alert>
+  //   //   )}
+  //   //   <Button onClick={() => setAlertVisibility(true)}>My button</Button>
+  //   // </div>
+  // );
 }
 
 export default App;
