@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import produce from 'immer';
 import { BsFillCalendarFill } from 'react-icons/bs';
 import Alert from './components/Alert';
 import ListGroup from './components/ListGroup';
@@ -18,13 +19,24 @@ function App() {
   ]);
 
   const handleClick = () => {
+    // setBugs(
+    //   bugs.map((bug) => (bug.id === 1 ? { ...bug, isFixed: true } : bug))
+    // );
     setBugs(
-      bugs.map((bug) => (bug.id === 1 ? { ...bug, isFixed: true } : bug))
+      produce((draft) => {
+        const bug = draft.find((bg) => bg.id === 1);
+        if (bug) bug.isFixed = true;
+      })
     );
   };
 
   return (
     <div>
+      {bugs.map((bug) => (
+        <p key={bug.id}>
+          {bug.title} {JSON.stringify(bug.isFixed)}
+        </p>
+      ))}
       <button onClick={handleClick}>Update bug🐞</button>
     </div>
     // <div>
