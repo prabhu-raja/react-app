@@ -34,17 +34,55 @@ function App() {
   };
   */
 
+  /*
   const [cartItems, setCartItems] = useState(['Product1', 'Product2']);
 
   const handleClear = () => {
     setCartItems([]);
   };
+  */
+
+  // const [game, setGame] = useState({
+  //   id: 1,
+  //   player: {
+  //     name: 'John',
+  //   },
+  // });
+
+  // const [pizza, setPizza] = useState({
+  //   name: '🍕',
+  //   toppings: ['🍄'],
+  // });
+
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: 'Product 1', quantity: 1 },
+      { id: 2, title: 'Product 2', quantity: 1 },
+    ],
+  });
+
+  const handleClick = () => {
+    // const updated = { ...game, player: { ...game.player, name: 'Bob' } };
+    // setGame(updated);
+    // const updated = [...pizza.toppings, '🥦', '🌶️'];
+    // setPizza({ ...pizza, toppings: updated });
+    setCart({
+      ...cart,
+      items: cart.items.map((itm) =>
+        itm.id === 1 ? { ...itm, quantity: itm.quantity + 1 } : itm
+      ),
+    });
+  };
 
   return (
-    <>
-      <NavBar cartItemsCount={cartItems.length}></NavBar>
-      <Cart cartItems={cartItems} onClear={handleClear}></Cart>
-    </>
+    <div>
+      <button onClick={handleClick}>click</button>
+    </div>
+    // <>
+    //   <NavBar cartItemsCount={cartItems.length}></NavBar>
+    //   <Cart cartItems={cartItems} onClear={handleClear}></Cart>
+    // </>
     // <div>
     //   {bugs.map((bug) => (
     //     <p key={bug.id}>
