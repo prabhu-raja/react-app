@@ -10,13 +10,30 @@ import NavBar from './components/NavBar';
 import Cart from './components/Cart';
 import ExpandableText from './components/ExpandableText';
 import Form from './Form';
+import ExpenseList from './expense-tracker/components/ExpenseList';
 
 function App() {
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: 'aaa', amount: 10, category: 'utilities' },
+    { id: 2, description: 'aaa', amount: 10, category: 'utilities' },
+    { id: 3, description: 'aaa', amount: 10, category: 'utilities' },
+    { id: 4, description: 'aaa', amount: 10, category: 'utilities' },
+  ]);
+
   return (
-    <div>
-      <Form />
-    </div>
+    <>
+      <ExpenseList
+        expenses={expenses}
+        onDelete={(id) => setExpenses(expenses.filter((exp) => exp.id !== id))}
+      />
+    </>
   );
+
+  // return (
+  //   <div>
+  //     <Form />
+  //   </div>
+  // );
   // const [alertVisible, setAlertVisibility] = useState(false);
   // const items = ['New York', 'San Francisco', 'Tokyo', 'Toronto'];
   // const handleSelectItem = (item: string) => {
