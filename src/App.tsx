@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import produce from 'immer';
 import { BsFillCalendarFill } from 'react-icons/bs';
 import Alert from './components/Alert';
@@ -15,6 +15,7 @@ import ExpenseFilter from './expense-tracker/components/ExpenseFilter';
 import ExpenseForm from './expense-tracker/components/Expenseform';
 
 function App() {
+  const ipRef = useRef<HTMLInputElement>(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [expenses, setExpenses] = useState([
     { id: 1, description: 'aaa', amount: 10, category: 'Groceries' },
@@ -26,8 +27,18 @@ function App() {
     ? expenses.filter((exp) => exp.category === selectedCategory)
     : expenses;
 
+  useEffect(() => {
+    ipRef.current && ipRef.current.focus();
+  });
+  useEffect(() => {
+    document.title = 'Sample';
+  });
+
   return (
     <>
+      <div>
+        <input ref={ipRef} id="name" type="text" className="form-control" />
+      </div>
       <div className="mb-5">
         <ExpenseForm
           onSubmit={(exp) =>
