@@ -80,6 +80,16 @@ function App() {
       });
   };
 
+  const onUpdateUser = (usr: User) => {
+    const originalUsers = [...users];
+    const updatedUser = { ...usr, name: `${usr.name}!` };
+    setUsers(users.map((u) => (u.id === usr.id ? updatedUser : u)));
+    axios.patch(`${userUrl}/${usr.id}`, updatedUser).catch((err) => {
+      setError(err?.message);
+      setUsers(originalUsers);
+    });
+  };
+
   return (
     <>
       {isLoading && <div className="spinner-border"></div>}
@@ -91,9 +101,14 @@ function App() {
         {users.map((usr) => (
           <li key={usr.id} className="list-group-item d-flex justify-content-between">
             {usr.name}
-            <button className="btn btn-outline-danger" onClick={() => onDeleteUser(usr)}>
-              Delete
-            </button>
+            <div>
+              <button className="btn btn-outline-secondary mx-3" onClick={() => onUpdateUser(usr)}>
+                Update
+              </button>
+              <button className="btn btn-outline-danger" onClick={() => onDeleteUser(usr)}>
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
