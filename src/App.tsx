@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError, CanceledError } from 'axios';
 import produce from 'immer';
 import { BsFillCalendarFill } from 'react-icons/bs';
 import Alert from './components/Alert';
@@ -22,9 +22,24 @@ interface User {
 }
 
 function App() {
+  const userUrl = 'https://jsonplaceholder.typicode.com/users';
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState('');
+
   useEffect(() => {
+    const controller = new AbortController();
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get<User[]>(userUrl, { signal: controller.signal });
+        setUsers(res.data);
+      } catch (err) {
+        if (err instanceof CanceledError) return;
+        setError((err as AxiosError).message);
+      }
+    };
+    fetchUsers();
+    return () => controller.abort();
+    /*
     axios
       .get<User[]>('https://jsonplaceholder.typicode.com/users')
       .then((res) => {
@@ -33,6 +48,7 @@ function App() {
       .catch((err) => {
         setError(err?.message);
       });
+    */
   }, []);
   return (
     <>
