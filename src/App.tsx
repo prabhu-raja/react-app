@@ -67,10 +67,26 @@ function App() {
     });
   };
 
+  const onAddUser = () => {
+    const originalUsers = [...users];
+    const newUser: User = { id: 0, name: 'PR' };
+    setUsers([newUser, ...users]);
+    axios
+      .post(userUrl, newUser)
+      .then(({ data }) => setUsers([data, ...users]))
+      .catch((err) => {
+        setError(err?.message);
+        setUsers(originalUsers);
+      });
+  };
+
   return (
     <>
       {isLoading && <div className="spinner-border"></div>}
       {error && <p className="text-danger">{error}</p>}
+      <button className="btn btn-primary mb-3" onClick={onAddUser}>
+        Add
+      </button>
       <ul className="list-group">
         {users.map((usr) => (
           <li key={usr.id} className="list-group-item d-flex justify-content-between">
