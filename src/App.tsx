@@ -57,13 +57,28 @@ function App() {
       });
     return () => controller.abort();
   }, []);
+
+  const onDeleteUser = (usr: User) => {
+    const originalUsers = [...users];
+    setUsers(users.filter((u) => u.id !== usr.id));
+    axios.delete(`${userUrl}/${usr.id}`).catch((err) => {
+      setError(err?.message);
+      setUsers(originalUsers);
+    });
+  };
+
   return (
     <>
       {isLoading && <div className="spinner-border"></div>}
       {error && <p className="text-danger">{error}</p>}
-      <ul>
+      <ul className="list-group">
         {users.map((usr) => (
-          <li key={usr.id}>{usr.name}</li>
+          <li key={usr.id} className="list-group-item d-flex justify-content-between">
+            {usr.name}
+            <button className="btn btn-outline-danger" onClick={() => onDeleteUser(usr)}>
+              Delete
+            </button>
+          </li>
         ))}
       </ul>
     </>
