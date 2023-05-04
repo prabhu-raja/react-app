@@ -27,6 +27,7 @@ function App() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    /*
     const controller = new AbortController();
     const fetchUsers = async () => {
       try {
@@ -39,16 +40,16 @@ function App() {
     };
     fetchUsers();
     return () => controller.abort();
-    /*
+    */
+    const controller = new AbortController();
     axios
-      .get<User[]>('https://jsonplaceholder.typicode.com/users')
-      .then((res) => {
-        setUsers(res.data);
-      })
+      .get<User[]>('https://jsonplaceholder.typicode.com/users', { signal: controller.signal })
+      .then((res) => setUsers(res.data))
       .catch((err) => {
+        if (err instanceof CanceledError) return;
         setError(err?.message);
       });
-    */
+    return () => controller.abort();
   }, []);
   return (
     <>
