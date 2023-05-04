@@ -13,8 +13,24 @@ import Form from './Form';
 import ExpenseList from './expense-tracker/components/ExpenseList';
 import ExpenseFilter from './expense-tracker/components/ExpenseFilter';
 import ExpenseForm from './expense-tracker/components/Expenseform';
+import ProductList from './components/ProductList';
 
 function App() {
+  const [category, setCategory] = useState('');
+  return (
+    <>
+      <select
+        className="form-select"
+        onChange={(evt) => setCategory(evt.target.value)}>
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+      </select>
+      <ProductList category={category}></ProductList>
+    </>
+  );
+
+  /*
   const ipRef = useRef<HTMLInputElement>(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [expenses, setExpenses] = useState([
@@ -56,6 +72,7 @@ function App() {
       />
     </>
   );
+  */
 
   // return (
   //   <div>
