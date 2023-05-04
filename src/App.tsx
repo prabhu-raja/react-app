@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import produce from 'immer';
 import { BsFillCalendarFill } from 'react-icons/bs';
 import Alert from './components/Alert';
@@ -15,7 +16,31 @@ import ExpenseFilter from './expense-tracker/components/ExpenseFilter';
 import ExpenseForm from './expense-tracker/components/Expenseform';
 import ProductList from './components/ProductList';
 
+interface User {
+  id: number;
+  name: string;
+}
+
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  useEffect(() => {
+    axios
+      .get<User[]>('https://jsonplaceholder.typicode.com/users')
+      .then((res) => {
+        setUsers(res.data);
+      });
+  }, []);
+  return (
+    <>
+      <ul>
+        {users.map((usr) => (
+          <li key={usr.id}>{usr.name}</li>
+        ))}
+      </ul>
+    </>
+  );
+  // ---
+  /*
   const [category, setCategory] = useState('');
   return (
     <>
@@ -29,7 +54,8 @@ function App() {
       <ProductList category={category}></ProductList>
     </>
   );
-
+  */
+  // -------
   /*
   const ipRef = useRef<HTMLInputElement>(null);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -73,7 +99,6 @@ function App() {
     </>
   );
   */
-
   // return (
   //   <div>
   //     <Form />
@@ -102,7 +127,6 @@ function App() {
     );
   };
   */
-
   /*
   const [cartItems, setCartItems] = useState(['Product1', 'Product2']);
 
@@ -110,19 +134,16 @@ function App() {
     setCartItems([]);
   };
   */
-
   // const [game, setGame] = useState({
   //   id: 1,
   //   player: {
   //     name: 'John',
   //   },
   // });
-
   // const [pizza, setPizza] = useState({
   //   name: '🍕',
   //   toppings: ['🍄'],
   // });
-
   // const [cart, setCart] = useState({
   //   discount: 0.1,
   //   items: [
@@ -130,7 +151,6 @@ function App() {
   //     { id: 2, title: 'Product 2', quantity: 1 },
   //   ],
   // });
-
   // const handleClick = () => {
   //   const updated = { ...game, player: { ...game.player, name: 'Bob' } };
   //   setGame(updated);
@@ -143,7 +163,6 @@ function App() {
   //     ),
   //   });
   // };
-
   // return (
   //   <>
   //     <ExpandableText>
