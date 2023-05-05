@@ -9,20 +9,6 @@ function App() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    /*
-    const controller = new AbortController();
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get<User[]>(userUrl, { signal: controller.signal });
-        setUsers(res.data);
-      } catch (err) {
-        if (err instanceof CanceledError) return;
-        setError((err as AxiosError).message);
-      }
-    };
-    fetchUsers();
-    return () => controller.abort();
-    */
     setLoading(true);
     const { request, cancel } = userService.getAll<User>();
     request
