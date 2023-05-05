@@ -17,7 +17,7 @@ class UserService {
     return apiClient.delete(`/users/${usr.id}`);
   }
 
-  addUser(newUser: User) {
+  createUser(newUser: User) {
     return apiClient.post('/users', newUser)
   }
 

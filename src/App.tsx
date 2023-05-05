@@ -41,7 +41,7 @@ function App() {
   const onDeleteUser = (usr: User) => {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== usr.id));
-    userService.deleteUser(usr).catch((err) => {
+    userService.deleteUser(usr.id).catch((err) => {
       setError(err?.message);
       setUsers(originalUsers);
     });
@@ -52,7 +52,7 @@ function App() {
     const newUser: User = { id: 0, name: 'PR' };
     setUsers([newUser, ...users]);
     userService
-      .addUser(newUser)
+      .createUser(newUser)
       .then(({ data }) => setUsers([data, ...users]))
       .catch((err) => {
         setError(err?.message);
