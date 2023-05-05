@@ -1,20 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import axios, { AxiosError, CanceledError } from 'axios';
-import produce from 'immer';
-import { BsFillCalendarFill } from 'react-icons/bs';
-import Alert from './components/Alert';
-import ListGroup from './components/ListGroup';
-import Button from './components/Button/Button';
-import Like from './components/Like';
 import './App.css';
-import NavBar from './components/NavBar';
-import Cart from './components/Cart';
-import ExpandableText from './components/ExpandableText';
-import Form from './Form';
-import ExpenseList from './expense-tracker/components/ExpenseList';
-import ExpenseFilter from './expense-tracker/components/ExpenseFilter';
-import ExpenseForm from './expense-tracker/components/Expenseform';
-import ProductList from './components/ProductList';
+import apiClient, { CanceledError } from './services/api-client';
 
 interface User {
   id: number;
@@ -22,7 +8,6 @@ interface User {
 }
 
 function App() {
-  const userUrl = 'https://jsonplaceholder.typicode.com/users';
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -44,8 +29,8 @@ function App() {
     */
     setLoading(true);
     const controller = new AbortController();
-    axios
-      .get<User[]>(userUrl, { signal: controller.signal })
+    apiClient
+      .get<User[]>('/users', { signal: controller.signal })
       .then((res) => {
         setUsers(res.data);
         setLoading(false);
@@ -61,7 +46,7 @@ function App() {
   const onDeleteUser = (usr: User) => {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== usr.id));
-    axios.delete(`${userUrl}/${usr.id}`).catch((err) => {
+    apiClient.delete(`/users/${usr.id}`).catch((err) => {
       setError(err?.message);
       setUsers(originalUsers);
     });
@@ -71,8 +56,8 @@ function App() {
     const originalUsers = [...users];
     const newUser: User = { id: 0, name: 'PR' };
     setUsers([newUser, ...users]);
-    axios
-      .post(userUrl, newUser)
+    apiClient
+      .post('/users', newUser)
       .then(({ data }) => setUsers([data, ...users]))
       .catch((err) => {
         setError(err?.message);
@@ -84,7 +69,7 @@ function App() {
     const originalUsers = [...users];
     const updatedUser = { ...usr, name: `${usr.name}!` };
     setUsers(users.map((u) => (u.id === usr.id ? updatedUser : u)));
-    axios.patch(`${userUrl}/${usr.id}`, updatedUser).catch((err) => {
+    apiClient.patch(`/users/${usr.id}`, updatedUser).catch((err) => {
       setError(err?.message);
       setUsers(originalUsers);
     });
