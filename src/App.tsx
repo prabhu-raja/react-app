@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import apiClient, { CanceledError } from './services/api-client';
-
-interface User {
-  id: number;
-  name: string;
-}
+import { CanceledError } from './services/api-client';
+import userService, { User } from './services/user-service';
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -28,9 +24,8 @@ function App() {
     return () => controller.abort();
     */
     setLoading(true);
-    const controller = new AbortController();
-    apiClient
-      .get<User[]>('/users', { signal: controller.signal })
+    const { request, cancel } = userService.getAllUsers();
+    request
       .then((res) => {
         setUsers(res.data);
         setLoading(false);
@@ -40,13 +35,13 @@ function App() {
         setError(err?.message);
         setLoading(false);
       });
-    return () => controller.abort();
+    return () => cancel();
   }, []);
 
   const onDeleteUser = (usr: User) => {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== usr.id));
-    apiClient.delete(`/users/${usr.id}`).catch((err) => {
+    userService.deleteUser(usr).catch((err) => {
       setError(err?.message);
       setUsers(originalUsers);
     });
@@ -56,8 +51,8 @@ function App() {
     const originalUsers = [...users];
     const newUser: User = { id: 0, name: 'PR' };
     setUsers([newUser, ...users]);
-    apiClient
-      .post('/users', newUser)
+    userService
+      .addUser(newUser)
       .then(({ data }) => setUsers([data, ...users]))
       .catch((err) => {
         setError(err?.message);
@@ -69,7 +64,7 @@ function App() {
     const originalUsers = [...users];
     const updatedUser = { ...usr, name: `${usr.name}!` };
     setUsers(users.map((u) => (u.id === usr.id ? updatedUser : u)));
-    apiClient.patch(`/users/${usr.id}`, updatedUser).catch((err) => {
+    userService.updateUser(updatedUser).catch((err) => {
       setError(err?.message);
       setUsers(originalUsers);
     });
